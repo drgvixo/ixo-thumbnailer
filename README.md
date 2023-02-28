@@ -1,8 +1,8 @@
 ## iXo thumbnailer
 ![screenshot](./screenshot.jpg)  
 Scripts bundle I use to generate my thumbnails: it may not suit you, but it may inspire you instead.  
-When you work with many identical images but in different formats, you need to identify them visually quickly, so, after generating the thumbnail, a color label with the extension name is added to it.  
-Following image types are supported:
+When you work with many identical images but in different formats, you need to quickly identify them visually, so, after generating the thumbnail, a color label with the extension name is added to it.  
+Following image extensions set:
 
 | ext | mime | desc |
 | --- | ---- | ---- |
@@ -31,7 +31,7 @@ Following image types are supported:
 | XBM | image/x-xbitmap | X11 bitmap graphic |
 | XPM | image/x-xpixmap | X11 pixmap graphic |
 
-List can be extended and configured.
+List can be extended.
 
 **Usage:** `ixo-thumbnailer [input] [output] [size]`
 
@@ -53,5 +53,5 @@ You may need to alter other files for the thumbnailer to work.
 
 ### Files:
 - /bin/ixo-thumbnailer
-- /bin/ixo-extract
+- /bin/ixo-****-extract
 - /usr/share/thumbnailers/ixo-thumbnailer.thumbnailer

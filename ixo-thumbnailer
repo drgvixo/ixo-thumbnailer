@@ -1,14 +1,5 @@
 #!/bin/sh
-#	iXo thumbnailer v2.0
-#	usage: ixo-thumbnailer2 [input] [output] [size]
-#	dependencies: imagemagick, ghostscript (optional for AI), gnome-kra-thumbnailer (optional for KRA), gnome-openraster-thumbnailer (optional for ORA), unzip (optional for KRA ,ORA and CBZ)
-#       Delegates:
-#	* AI:  <delegate decode="ai" encode="ps" command="&quot;gs&quot; -dQUIET -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=&quot;%o&quot; &quot;%i&quot;"/>
-#       * CBZ: <delegate decode="cbz" stealth="" command="&quot;cbz-extract-cover&quot; &quot;%i&quot; &quot;%o&quot;"/> <<< EXPERIMENTAL!!! use grt (complementary script for ixo-thumbnailer).
-#       * KRA: <delegate decode="kra" stealth="" command="&quot;gnome-kra-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
-#	* ORA: <delegate decode="ora" stealth="" command="&quot;gnome-openraster-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
-#
-font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
+#font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
 location="southeast"
 
 inp=$1
