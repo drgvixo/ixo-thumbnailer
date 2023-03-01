@@ -1,14 +1,5 @@
 #!/bin/sh
-#	iXo thumbnailer v2.0
-#	usage: ixo-thumbnailer2 [input] [output] [size]
-#	dependencies: imagemagick, ghostscript (optional for AI), gnome-kra-thumbnailer (optional for KRA), gnome-openraster-thumbnailer (optional for ORA), unzip (optional for KRA ,ORA and CBZ)
-#       Delegates:
-#	* AI:  <delegate decode="ai" encode="ps" command="&quot;gs&quot; -dQUIET -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=&quot;%o&quot; &quot;%i&quot;"/>
-#       * CBZ: <delegate decode="cbz" stealth="" command="&quot;cbz-extract-cover&quot; &quot;%i&quot; &quot;%o&quot;"/> <<< EXPERIMENTAL!!! use grt (complementary script for ixo-thumbnailer).
-#       * KRA: <delegate decode="kra" stealth="" command="&quot;gnome-kra-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
-#	* ORA: <delegate decode="ora" stealth="" command="&quot;gnome-openraster-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
-#
-font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
+#font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
 location="southeast"
 
 inp=$1
@@ -42,7 +33,7 @@ cap="\n\e[4mixo-thumbnailer\e[0m: Generates thumbnails with format/extension tag
 \n\t\tUsage: ixo-thumbnailer [INPUT] [OUTPUT] [SIZE]
 \n"
 if [ -z "$3" ]; then
-	echo -e "$cap"
+	printf "$cap"
 	exit 0
 else
 	case $ext in
@@ -64,7 +55,7 @@ else
 		tif|TIF|tiff|TIFF) BG='#d00' FG='#fff' ;;
 		xcf|XCF) BG='#654' FG='#fff' extra="-layers merge" ;;
 		xbm|XBM|xpm|XPM) BG='#e40' FG='#fff' ;;
-		*) echo -e "$cap" ; exit 0 ;;
+		*) printf "$cap" ; exit 0 ;;
 	esac
 	convert -background none "$ext:$inp" -thumbnail $3x$3 $extra \( -background $BG -fill $FG $font label:"$lab" -bordercolor $BG -border 5 \) -gravity $location -compose over -composite "png:$2"
 fi
