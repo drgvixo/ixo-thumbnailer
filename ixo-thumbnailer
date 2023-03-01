@@ -46,9 +46,9 @@ else
 		kra|KRA) BG='#c3b' FG='#fff' ;;
 		ora|ORA) BG='#000' FG='#fff' ;;
 		pam|PAM|pbm|PBM|pgm|PGM|pnm|PNM|ppm|PPM) BG='#223' FG='#dde' ;;
-		pdf|PDF) BG='#d00' FG='#fff' inp=$1[0] ;;
+		pdf|PDF) BG='#d00' FG='#fff' inp="$1[0]" ;;
 		png|PNG) BG='#dde' FG='#000' ;;
-		psd|PSD) BG='#115' FG='#8cf' inp=$1[0] ;;
+		psd|PSD) BG='#115' FG='#8cf' inp="$1[0]" ;;
 		six|SIX|sixel|SIXEL) BG='#000' FG='#0d8' ;;
 		svg|SVG) BG='#f90' FG='#000' ;;
 		tga|TGA) BG='#556' FG='#fff' ;;
