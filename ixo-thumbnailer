@@ -1,39 +1,48 @@
 #!/bin/sh
-#font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
+#	iXo thumbnailer v2.0
+#	usage: ixo-thumbnailer2 [input] [output] [size]
+#	dependencies: imagemagick, ghostscript (optional for AI), gnome-kra-thumbnailer (optional for KRA), gnome-openraster-thumbnailer (optional for ORA), unzip (optional for KRA ,ORA and CBZ)
+#       Delegates:
+#	* AI:  <delegate decode="ai" encode="ps" command="&quot;gs&quot; -dQUIET -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=&quot;%o&quot; &quot;%i&quot;"/>
+#       * CBZ: <delegate decode="cbz" stealth="" command="&quot;cbz-extract-cover&quot; &quot;%i&quot; &quot;%o&quot;"/> <<< EXPERIMENTAL!!! use grt (complementary script for ixo-thumbnailer).
+#       * KRA: <delegate decode="kra" stealth="" command="&quot;gnome-kra-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
+#	* ORA: <delegate decode="ora" stealth="" command="&quot;gnome-openraster-thumbnailer&quot; -s 256 &quot;%i&quot; &quot;%o&quot;"/>
+#
+font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
 location="southeast"
 
 inp=$1
-ext=$(echo "$1" | awk -F '.' '{print $NF}')
-lab=$(echo "$ext" | tr '[:lower:]' '[:upper:]')
+ext=$(echo $1 | awk -F '.' '{print $NF}')
+lab=$(echo $ext | tr '[:lower:]' '[:upper:]')
 cap="\n\e[4mixo-thumbnailer\e[0m: Generates thumbnails with format/extension tag from following image types:
-\t\t* AI      application/illustrator       (Adobe Illustrator file)
-\t\t* CBR     application/vnd.comicbook-rar (Comic book rar archive)
-\t\t* CBZ     application/vnd.comicbook+zip (Comic book zip archive)
-\t\t* CR2     image/x-canon-cr2             (Canon raw image)
-\t\t* FF      application/farbfeld          (Farbfeld image)
-\t\t* FF.BZ2  application/farbfeld-bz2      (Compressed Farbfeld image)
-\t\t* JPG     image/jpeg                    (JPEG image)                     *prefer xdg-pixbuf-thumbnailer
-\t\t* KRA     application/x-krita           (Krita image document)
-\t\t* ORA     image/openraster              (OpenRaster image)
-\t\t* PAM     image/x-portable-arbitrarymap (Portable Arbitrary Map image)
-\t\t* PBM     image/x-portable-bitmap       (Portable Bitmap image)
-\t\t* PGM     image/x-portable-graymap      (Portable Gray Map image)
-\t\t* PNM     image/x-portable-anymap       (Portable Any Map image)
-\t\t* PPM     image/x-portable-pixmap       (Portable Pixmap image file)
-\t\t* PDF     application/pdf               (Portable document format)       *some errors
-\t\t* PNG     image/png                     (Portable network graphic)       *prefer xdg-pixbuf-thumbnailer
-\t\t* PSD     image/vnd.adobe.photoshop     (Adobe Photoshop document)
-\t\t* SIXEL   image/sixel                   (Sixel bitmap)
-\t\t* SVG     image/svg+xml                 (Scalable Vector Graphics file)
-\t\t* TGA     image/x-tga                   (Targa Graphic)
-\t\t* TIF     image/tiff                    (Tagged image file)              *prefer xdg-pixbuf thumbnailer
-\t\t* XCF     image/x-xcf                   (GIMP image)
-\t\t* XBM     image/x-xbitmap               (X11 Bitmap graphic)
-\t\t* XPM     image/x-xpixmap               (X11 Pixmap graphic)
+\t\t*\033[0;32m AI     \033[0m application/illustrator       (Adobe Illustrator file)
+\t\t*\033[0;32m CBR    \033[0m application/vnd.comicbook-rar (Comic book rar archive)
+\t\t*\033[0;32m CBZ    \033[0m application/vnd.comicbook+zip (Comic book zip archive)
+\t\t*\033[0;32m CR2    \033[0m image/x-canon-cr2             (Canon raw image)
+\t\t*\033[0;32m FF     \033[0m application/farbfeld          (Farbfeld image)
+\t\t*\033[0;32m FF.BZ2 \033[0m application/farbfeld-bz2      (Compressed Farbfeld image)
+\t\t*\033[0;32m JPG    \033[0m image/jpeg                    (JPEG image)                     *prefer xdg-pixbuf-thumbnailer
+\t\t*\033[0;32m KRA    \033[0m application/x-krita           (Krita image document)
+\t\t*\033[0;32m ORA    \033[0m image/openraster              (OpenRaster image)
+\t\t*\033[0;32m PAM    \033[0m image/x-portable-arbitrarymap (Portable Arbitrary Map image)
+\t\t*\033[0;32m PBM    \033[0m image/x-portable-bitmap       (Portable Bitmap image)
+\t\t*\033[0;32m PGM    \033[0m image/x-portable-graymap      (Portable Gray Map image)
+\t\t*\033[0;32m PNM    \033[0m image/x-portable-anymap       (Portable Any Map image)
+\t\t*\033[0;32m PPM    \033[0m image/x-portable-pixmap       (Portable Pixmap image file)
+\t\t*\033[0;32m PDF    \033[0m application/pdf               (Portable document format)       *some errors
+\t\t*\033[0;32m PNG    \033[0m image/png                     (Portable network graphic)       *prefer xdg-pixbuf-thumbnailer
+\t\t*\033[0;32m PSD    \033[0m image/vnd.adobe.photoshop     (Adobe Photoshop document)
+\t\t*\033[0;32m SIXEL  \033[0m image/sixel                   (Sixel bitmap)
+\t\t*\033[0;32m SVG    \033[0m image/svg+xml                 (Scalable Vector Graphics file)
+\t\t*\033[0;32m TGA    \033[0m image/x-tga                   (Targa Graphic)
+\t\t*\033[0;32m TIF    \033[0m image/tiff                    (Tagged image file)              *prefer xdg-pixbuf thumbnailer
+\t\t*\033[0;32m XCF    \033[0m image/x-xcf                   (GIMP image)
+\t\t*\033[0;32m XBM    \033[0m image/x-xbitmap               (X11 Bitmap graphic)
+\t\t*\033[0;32m XPM    \033[0m image/x-xpixmap               (X11 Pixmap graphic)
 \n\t\tUsage: ixo-thumbnailer [INPUT] [OUTPUT] [SIZE]
 \n"
 if [ -z "$3" ]; then
-	echo "$cap"
+	echo -e "$cap"
 	exit 0
 else
 	case $ext in
@@ -46,16 +55,16 @@ else
 		kra|KRA) BG='#c3b' FG='#fff' ;;
 		ora|ORA) BG='#000' FG='#fff' ;;
 		pam|PAM|pbm|PBM|pgm|PGM|pnm|PNM|ppm|PPM) BG='#223' FG='#dde' ;;
-		pdf|PDF) BG='#d00' FG='#fff' inp="$1[0]" ;;
+		pdf|PDF) BG='#d00' FG='#fff' inp=$1[0] ;;
 		png|PNG) BG='#dde' FG='#000' ;;
-		psd|PSD) BG='#115' FG='#8cf' inp="$1[0]" ;;
+		psd|PSD) BG='#115' FG='#8cf' inp=$1[0] ;;
 		six|SIX|sixel|SIXEL) BG='#000' FG='#0d8' ;;
 		svg|SVG) BG='#f90' FG='#000' ;;
 		tga|TGA) BG='#556' FG='#fff' ;;
 		tif|TIF|tiff|TIFF) BG='#d00' FG='#fff' ;;
 		xcf|XCF) BG='#654' FG='#fff' extra="-layers merge" ;;
 		xbm|XBM|xpm|XPM) BG='#e40' FG='#fff' ;;
-		*) echo "$cap" ; exit 0 ;;
+		*) echo -e "$cap" ; exit 0 ;;
 	esac
-	convert -background none "$ext:$inp" -thumbnail "$3"x"$3" "$extra" \( -background $BG -fill $FG "$font" label:"$lab" -bordercolor $BG -border 5 \) -gravity $location -compose over -composite "png:$2"
+	convert -background none "$ext:$inp" -thumbnail $3x$3 $extra \( -background $BG -fill $FG $font label:"$lab" -bordercolor $BG -border 5 \) -gravity $location -compose over -composite "png:$2"
 fi
