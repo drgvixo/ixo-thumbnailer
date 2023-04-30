@@ -1,0 +1,25 @@
+#!/bin/sh
+# usage $0 [input] [output]
+ext=$(echo $1 | awk -F '.' '{print $NF}')
+cap="Usage: ixo-extract [input] [output.cbr|cbz|kra]"
+if [ -z "$1" ]; then
+	echo $cap;
+	exit 0
+else
+	case $ext in
+		cbr|CBR)
+			cover=$(unrar lb "$1" | sort | head -1)
+			unrar p "$1" "$cover" > "$2"
+			;;
+		cbz|CBZ)
+			cover=$(unzip -qq -l $1 | awk '{print $4}' | sed '/\/$/d' | sort | head -1)
+			unzip -qq -c "$1" "$cover" > "$2"
+			;;
+		kra|KRA)
+			unzip -qq -c "$1" mergedimage.png > "$2"
+			;;
+		*)
+			echo $cap
+			;;
+	esac
+fi

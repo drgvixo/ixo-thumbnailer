@@ -1,9 +1,0 @@
-#!/bin/sh
-# usage $0 [input] [output]
-ext=$(echo $1 | awk -F '.' '{print $NF}')
-cap="Usage: ixo-extractor [input] [output.cbr|cbz|kra]"
-if [ -z "$1" ]; then echo $cap; exit 0
-else
-	cover=$(unrar lb "$1" | sort | head -1)
-	unrar p "$1" "$cover" > "$2"
-fi

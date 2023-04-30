@@ -1,5 +1,5 @@
 #!/bin/sh
-#font="-font /usr/share/fonts/TTF/TerminusTTF.ttf -pointsize 16"
+font="" # "-font /full/path/to/font.ext -pointsize 16"
 location="southeast"
 
 inp=$1

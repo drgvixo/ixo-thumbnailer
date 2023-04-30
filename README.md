@@ -44,9 +44,9 @@ List can be extended.
 Add the following lines to `/etc/ImageMagick/delegates.xml` inside `<delegatemap>` tag:
 ```xml
 <delegate decode="ai" encode="ps" command="&quot;gs&quot; -dQUIET -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=&quot;%o&quot; &quot;%i&quot;"/>
-<delegate decode="cbr" stealth="" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
-<delegate decode="cbz" stealth="" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
-<delegate decode="kra" stealth="" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
+<delegate decode="cbr" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
+<delegate decode="cbz" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
+<delegate decode="kra" command="&quot;ixo-extract&quot; &quot;%i&quot; &quot;%o&quot;"/>
 ```
 this enables ImageMagick to work with such formats.
 You may need to alter other files for the thumbnailer to work.
