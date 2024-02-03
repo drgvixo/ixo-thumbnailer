@@ -7,6 +7,7 @@ Following image extensions set:
 | ext | mime | desc |
 | --- | ---- | ---- |
 | AI  | application/illustrator | Adobe Illustrator file |
+| APNG | image/apng | Portable network graphic animation |
 | CBR | application/vnd.comicbook*-rar | Comic book rar archive |
 | CBZ | application/vnd.comicbook+zip | Comic book zip archive |
 | CR2 | image/x-canon-cr2 | Canon raw image |
