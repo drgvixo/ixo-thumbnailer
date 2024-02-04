@@ -1,4 +1,4 @@
 [Thumbnailer Entry]
 TryExec=ixo-thumbnailer
 Exec=ixo-thumbnailer %i %o %s
-MimeType=application/illustrator;application/vnd.comicbook-rar;application/vnd.comicbook+zip;application/x-krita;image/apng;image/farbfeld-bz2;image/farbfeld;image/openraster;image/sixel;image/svg+xml;image/tiff;image/vnd.adobe.photoshop;image/x-canon-cr2;image/x-portable-anymap;image/x-portable-arbitrarymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-psd;image/x-tga;image/x-xbitmap;image/x-xcf;image/x-xpixmap
+MimeType=application/illustrator;application/vnd.comicbook-rar;application/vnd.comicbook+zip;application/x-krita;image/apng;image/avif;image/farbfeld-bz2;image/farbfeld;image/openraster;image/sixel;image/svg+xml;image/tiff;image/vnd.adobe.photoshop;image/x-canon-cr2;image/x-portable-anymap;image/x-portable-arbitrarymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-psd;image/x-tga;image/x-xbitmap;image/x-xcf;image/x-xpixmap

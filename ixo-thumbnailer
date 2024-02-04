@@ -8,6 +8,7 @@ lab=$(echo $ext | tr '[:lower:]' '[:upper:]')
 cap="\n\e[4mixo-thumbnailer\e[0m: Generates thumbnails with format/extension tag from following image types:
 \t\t*\033[0;32m AI     \033[0m application/illustrator       (Adobe Illustrator file)
 \t\t+\033[0;32m APNG   \033[0m image/apng                    (Portable network graphic animation)
+\t\t+\033[0;32m AVIF   \033[0m image/avif                    (AV1 Image File Format)
 \t\t*\033[0;32m CBR    \033[0m application/vnd.comicbook-rar (Comic book rar archive)
 \t\t*\033[0;32m CBZ    \033[0m application/vnd.comicbook+zip (Comic book zip archive)
 \t\t*\033[0;32m CR2    \033[0m image/x-canon-cr2             (Canon raw image)
@@ -40,6 +41,7 @@ else
 	case $ext in
 		ai|AI)   BG='#310' FG='#c50' ;;
 		apng|APNG) BG='#eee' FG='#d00' inp="$1[0]";;
+		avif|AVIF) BG='#fa3' FG='#000';;
 		bz2|BZ2) BG='#17a' FG='#fff' lab="FF.BZ2";;
 		cbz|CBZ|cbr|CBR) BG='#fb3' FG='#000' ;;
 		cr2|CR2) BG='#000' FG='#fff' ;;
